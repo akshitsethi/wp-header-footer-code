@@ -1,0 +1,15 @@
+{
+  "name": "wp-header-footer-code",
+  "version": "1.0.0",
+  "description": "Insert custom code into the header & footer of a WordPress website.",
+  "scripts": {
+    "lint": "eslint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "akshitsethi",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1"
+  }
+}
