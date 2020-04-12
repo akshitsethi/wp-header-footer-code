@@ -6,7 +6,7 @@
  * @since 1.0.0
  */
 
-use AkshitSethi\Plugins\WidgetsBundle\Config;
+use AkshitSethi\Plugins\WPHeaderFooterCode\Config;
 require_once 'header.php';
 
 ?>
@@ -15,14 +15,14 @@ require_once 'header.php';
 	<div class="as-float-left">
 		<div class="as-mobile-menu">
 			<a href="javascript:void;">
-				<img src="<?php echo Config::$plugin_url; ?>assets/admin/images/toggle.png" alt="<?php esc_attr_e( 'Menu', 'widgets-bundle' ); ?>" />
+				<img src="<?php echo Config::$plugin_url; ?>assets/admin/images/toggle.png" alt="<?php esc_attr_e( 'Menu', 'wp-header-footer-code' ); ?>" />
 			</a>
 		</div><!-- .as-mobile-menu -->
 
 		<ul class="as-main-menu">
-			<li><a href="#options"><?php esc_html_e( 'Options', 'widgets-bundle' ); ?></a></li>
-			<li><a href="#support"><?php esc_html_e( 'Support', 'widgets-bundle' ); ?></a></li>
-			<li><a href="#about"><?php esc_html_e( 'About', 'widgets-bundle' ); ?></a></li>
+			<li><a href="#javascript"><?php esc_html_e( 'JavaScript', 'wp-header-footer-code' ); ?></a></li>
+			<li><a href="#support"><?php esc_html_e( 'Support', 'wp-header-footer-code' ); ?></a></li>
+			<li><a href="#about"><?php esc_html_e( 'About', 'wp-header-footer-code' ); ?></a></li>
 		</ul>
 	</div><!-- .as-float-left -->
 
@@ -30,7 +30,7 @@ require_once 'header.php';
 		<?php
 
 			// Tabs.
-			require_once 'settings-options.php';
+			require_once 'settings-javascript.php';
 			require_once 'settings-support.php';
 			require_once 'settings-about.php';
 
