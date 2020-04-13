@@ -1,37 +1,29 @@
-=== Maintenance Mode & Coming Soon ===
+=== WP Header & Footer Code ===
 Contributors: akshitsethi
 Donate link: https://akshitsethi.com/
-Tags: coming soon, coming soon page, construction, landing page, launch, launch page, maintenance, maintenance mode, newsletter, offline, unavailable, under construction, wordpress coming soon, wordpress maintenance mode, wordpress under construction
+Tags: header js, custom js, custom css, header css, insert js, insert css, add css, add js, page css, page js, custom post js, custom post js
 Requires at least: 3.5.1
 Tested up to: 5.4
-Requires PHP: 5.6
+Requires page js, PHP: 5.6
 Stable tag: 1.5.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Create a simple yet elegant Coming Soon, Launch Page, Under Construction, or Maintenance Mode page for your website.
+Add your custom CSS and JS code globally to the header & footer of your website. Also, CSS & JS can be added for individual posts & pages as well.
 
 
 == Description ==
-The Maintenance Mode & Coming Soon plugin allows you to quickly & easily set up a Coming Soon, Launch Page, Under Construction, or Maintenance Mode page for your website. It's Simple yet flexible and works with any WordPress theme out there. Also, lets you have full control over the frontend of the website and every element can be customized with just a few clicks.
+Add your custom CSS and JS code globally to the header & footer of your website. Also, CSS & JS can be added for individual posts & pages as well. Comes packed with a beautiful editor which identifies code errors in real-time.
 
 
 = Plugin Features =
 
 * Works with any WordPress Theme.
-* Completely customize the look and feel of your **Coming Soon / Maintenance Mode** page.
-* Each and every element of the maintenance page can be configured.
-* W3 Total Cache and WP Super Cache Support.
-* Easily add Custom CSS and HTML.
-* Collect Emails with MailChimp.
-* You can let search engines to view website normally while visitors see the "Coming Soon" page.
-* Visible to only non logged in users so you can build your site while visitors see the "Coming Soon" page. Configurable via options panel.
-* Supports Custom Login URL.
-* Integrated with Google Fonts.
-* Stretch Background Image to Cover the Entire Browser.
-* Uses HTML5 & CSS3.
-* Translation Ready, i18n Support.
-* Powerful Options Panel.
+* Add CSS & JS code to the header & footer of your website.
+* Individual CSS & JS for posts & pages can also be added via meta boxes.
+* Supports all post types.
+* Beautiful editor for writing the code.
+* Get to know about the errors in your code in real time.
 * Get support within the options panel itself. It's something you going to love.
 * **FREE Forever**
 
@@ -39,10 +31,10 @@ The Maintenance Mode & Coming Soon plugin allows you to quickly & easily set up 
 
 To manually install this plugin, please follow the instructions below.
 
-1. Upload `maintenance-mode-coming-soon` folder to the `/wp-content/plugins/` directory.
+1. Upload `wp-header-footer-code` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Go to 'Maintenance Mode & Coming Soon' options under the 'Settings' menu.
-4. Configure the plugin and start enjoying it.
+3. Go to 'WP Header & Footer Code' options under the 'Settings' menu.
+4. Add your global CSS & JS code and your are done.
 
 
 == Frequently Asked Questions ==
@@ -54,26 +46,9 @@ Getting help is just a click away now. Report your issues using the support form
 
 == Screenshots ==
 
-1. Simple maintenance page
-2. Coming soon page
-3. See how perfectly it adapts to mobile
-4. Mobile optimized admin panel of the plugin
-5. Submit support ticket from the options panel itself
 
 
 == Changelog ==
-
-= 1.5.1 =
-* Added POT file
-
-= 1.5.0 =
-* Code has been completely refactored
-* Lots of bugs fixing has been done
-* Missing CSRF protection has been added
-
-= 1.0.1 =
-* Fixed issue with uninstalling plugin
-* Correction with author meta links
 
 = 1.0 =
 First release of the plugin.
