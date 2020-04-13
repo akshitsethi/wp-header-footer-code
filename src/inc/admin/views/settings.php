@@ -21,7 +21,7 @@ require_once 'header.php';
 
 		<ul class="as-main-menu">
 			<li><a href="#css"><?php esc_html_e( 'CSS', 'wp-header-footer-code' ); ?></a></li>
-			<li><a href="#javascript"><?php esc_html_e( 'JavaScript', 'wp-header-footer-code' ); ?></a></li>
+			<li><a href="#js"><?php esc_html_e( 'JavaScript', 'wp-header-footer-code' ); ?></a></li>
 			<li><a href="#support"><?php esc_html_e( 'Support', 'wp-header-footer-code' ); ?></a></li>
 			<li><a href="#about"><?php esc_html_e( 'About', 'wp-header-footer-code' ); ?></a></li>
 		</ul>
