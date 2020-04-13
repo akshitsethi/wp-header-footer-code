@@ -1,0 +1,203 @@
+# Copyright (C) 2020 akshitsethi
+# This file is distributed under the same license as the WP Header & Footer Code plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Header & Footer Code 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/src\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-04-14T01:01:52+05:30\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: wp-header-footer-code\n"
+
+#. Plugin Name of the plugin
+#: inc/class-config.php:46
+msgid "WP Header & Footer Code"
+msgstr ""
+
+#. Description of the plugin
+msgid "Insert custom code into the header & footer of a WordPress website."
+msgstr ""
+
+#. Author of the plugin
+msgid "akshitsethi"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://akshitsethi.com"
+msgstr ""
+
+#: inc/admin/views/header.php:18
+msgid "by"
+msgstr ""
+
+#: inc/admin/views/header.php:18
+msgid "Akshit Sethi"
+msgstr ""
+
+#: inc/admin/views/header.php:22
+#: inc/class-admin.php:86
+msgid "Save Changes"
+msgstr ""
+
+#: inc/admin/views/settings-about.php:15
+msgid "ABOUT"
+msgstr ""
+
+#: inc/admin/views/settings-about.php:16
+msgid "Hola! I'm Akshit Sethi, Designer + Developer by profession & Entrepreneur by passion. In love with WWW and Spanish. Travel is life. When I am not coding, I am reading anything worth reading. I create premium WordPress themes & plugins."
+msgstr ""
+
+#: inc/admin/views/settings-about.php:19
+msgid "Show me some love and connect with me via social channels."
+msgstr ""
+
+#: inc/admin/views/settings-about.php:21
+#: inc/class-admin.php:118
+msgid "Twitter"
+msgstr ""
+
+#: inc/admin/views/settings-about.php:25
+#: inc/class-admin.php:117
+msgid "Facebook"
+msgstr ""
+
+#: inc/admin/views/settings-css.php:16
+#: inc/admin/views/settings-css.php:21
+#: inc/admin/views/settings.php:23
+#: inc/class-admin.php:286
+msgid "CSS"
+msgstr ""
+
+#: inc/admin/views/settings-css.php:17
+msgid "Insert your custom CSS code in the appropriate section of the page."
+msgstr ""
+
+#: inc/admin/views/settings-css.php:22
+msgid "Add CSS to be inserted in the header of the page."
+msgstr ""
+
+#: inc/admin/views/settings-css.php:25
+#: inc/class-admin.php:287
+msgid "Add CSS to be inserted in the header of the page. Please note that %1$sopening <style> and closing </style> tags%2$s are not required. Just add your CSS code and nothing else."
+msgstr ""
+
+#: inc/admin/views/settings-javascript.php:16
+#: inc/admin/views/settings.php:24
+msgid "JavaScript"
+msgstr ""
+
+#: inc/admin/views/settings-javascript.php:17
+msgid "Insert your custom JS code in the appropriate section of the page."
+msgstr ""
+
+#: inc/admin/views/settings-javascript.php:21
+msgid "Header JS"
+msgstr ""
+
+#: inc/admin/views/settings-javascript.php:22
+#: inc/admin/views/settings-javascript.php:30
+msgid "Add JS to be inserted in the header of the page."
+msgstr ""
+
+#: inc/admin/views/settings-javascript.php:25
+#: inc/class-admin.php:293
+msgid "Add JS to be inserted in the header of the page. Please note that %1$sopening <script> and closing </script> tags%2$s are not required. Just add the code between these tags over here."
+msgstr ""
+
+#: inc/admin/views/settings-javascript.php:29
+msgid "Footer JS"
+msgstr ""
+
+#: inc/admin/views/settings-javascript.php:33
+msgid "Add JS to be inserted in the footer of the page. Please note that %1$sopening <script> and closing </script> tags%2$s are not required. Just add the code between these tags over here."
+msgstr ""
+
+#: inc/admin/views/settings-support.php:16
+msgid "SUPPORT"
+msgstr ""
+
+#: inc/admin/views/settings-support.php:17
+msgid "Getting help is just a click away now. Report the issue you are facing with the plugin using the form below and we will get back to you at the email address provided."
+msgstr ""
+
+#: inc/admin/views/settings-support.php:21
+msgid "Email Address"
+msgstr ""
+
+#: inc/admin/views/settings-support.php:22
+msgid "Please provide your email address"
+msgstr ""
+
+#: inc/admin/views/settings-support.php:24
+msgid "You will receive support response at this email address."
+msgstr ""
+
+#: inc/admin/views/settings-support.php:28
+msgid "Issue / Feedback"
+msgstr ""
+
+#: inc/admin/views/settings-support.php:29
+#: inc/admin/views/settings-support.php:31
+msgid "Please explain the issue you are facing with the plugin. Provide as much detail as possible."
+msgstr ""
+
+#: inc/admin/views/settings.php:18
+msgid "Menu"
+msgstr ""
+
+#: inc/admin/views/settings.php:25
+msgid "Support"
+msgstr ""
+
+#: inc/admin/views/settings.php:26
+msgid "About"
+msgstr ""
+
+#: inc/class-admin.php:87
+msgid "Ask for Support"
+msgstr ""
+
+#: inc/class-admin.php:88
+msgid "Please save your changes first."
+msgstr ""
+
+#: inc/class-admin.php:89
+msgid "Processing.."
+msgstr ""
+
+#: inc/class-admin.php:143
+msgid "There was an error processing the request. Please try again later."
+msgstr ""
+
+#: inc/class-admin.php:148
+msgid "Request does not seem to be a valid one. Try again by refreshing the page."
+msgstr ""
+
+#: inc/class-admin.php:171
+msgid "Options have been updated successfully."
+msgstr ""
+
+#: inc/class-admin.php:192
+msgid "Please fill in both the fields to create your support ticket."
+msgstr ""
+
+#: inc/class-admin.php:208
+msgid "I have received your support ticket and will get back to you shortly!"
+msgstr ""
+
+#: inc/class-admin.php:214
+msgid "There was an error creating the support ticket. You can try again later or send me an email directly at akshitsethi@gmail.com"
+msgstr ""
+
+#: inc/class-admin.php:253
+msgid "Custom CSS & JS"
+msgstr ""
+
+#: inc/class-admin.php:292
+msgid "JS Code"
+msgstr ""
