@@ -23,15 +23,19 @@ class Front {
 	public $options;
 
 	/**
+	 * @var array|false
+	 */
+	public $meta;
+
+	/**
 	 * Class constructor.
 	 */
 	public function __construct() {
 		// Load options
 		$this->options = get_option( Config::DB_OPTION, Config::DEFAULT_OPTIONS );
 
-		add_action( 'wp_head', array( $this, 'css' ), PHP_INT_MAX );
-		add_action( 'wp_head', array( $this, 'header_js' ), PHP_INT_MAX );
-		add_action( 'wp_footer', array( $this, 'footer_js' ), PHP_INT_MAX );
+		add_action( 'wp_head', array( $this, 'header' ), PHP_INT_MAX );
+		add_action( 'wp_footer', array( $this, 'footer' ), PHP_INT_MAX );
 	}
 
 
@@ -40,25 +44,46 @@ class Front {
 	 *
 	 * @since 1.0.0
 	 */
-	public function css() {
+	public function header() {
+		// Load post meta
+		$this->meta = get_post_meta( get_the_ID(), '_' . Config::PREFIX . 'post_meta_fields', true );
+
+		// CSS
+		// Global
 		if ( $this->if_exists( $this->options['css'] ) ) {
 			echo '<style>' . "\r\n";
 			echo stripslashes( $this->options['css'] );
 			echo '</style>' . "\r\n";
 		}
-	}
 
+		// Post
+		if ( $this->meta ) {
+			if ( $this->if_exists( $this->meta['css'] ) ) {
+				if ( is_singular() ) {
+					echo '<style>' . "\r\n";
+					echo stripslashes( $this->meta['css'] );
+					echo '</style>' . "\r\n";
+				}
+			}
+		}
 
-	/**
-	 * Adds custom JS to the header.
-	 *
-	 * @since 1.0.0
-	 */
-	public function header_js() {
+		// JS
+		// Global
 		if ( $this->if_exists( $this->options['js']['header'] ) ) {
 			echo '<script type="text/javascript">' . "\r\n";
 			echo stripslashes( $this->options['js']['header'] );
 			echo '</script>' . "\r\n";
+		}
+
+		// Post
+		if ( $this->meta ) {
+			if ( $this->if_exists( $this->meta['js'] ) ) {
+				if ( is_singular() ) {
+					echo '<script type="text/javascript">' . "\r\n";
+					echo stripslashes( $this->meta['js'] );
+					echo '</script>' . "\r\n";
+				}
+			}
 		}
 	}
 
@@ -68,7 +93,7 @@ class Front {
 	 *
 	 * @since 1.0.0
 	 */
-	public function footer_js() {
+	public function footer() {
 		if ( $this->if_exists( $this->options['js']['footer'] ) ) {
 			echo '<script type="text/javascript">' . "\r\n";
 			echo stripslashes( $this->options['js']['footer'] );
