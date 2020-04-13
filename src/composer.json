@@ -3,8 +3,7 @@
   "description": "Insert custom code into the header & footer of a WordPress website.",
   "keywords": [
     "wordpress",
-    "plugin",
-    "widgets"
+    "plugin"
   ],
   "type": "wordpress-plugin",
   "require": {

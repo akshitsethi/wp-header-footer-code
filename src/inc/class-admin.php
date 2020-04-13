@@ -22,8 +22,9 @@ class Admin {
 	 */
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_menu' ) );
+		add_action( 'wp_ajax_' . Config::PREFIX . 'js', array( $this, 'save_options' ) );
+		add_action( 'wp_ajax_' . Config::PREFIX . 'css', array( $this, 'save_options' ) );
 		add_action( 'wp_ajax_' . Config::PREFIX . 'support', array( $this, 'support_ticket' ) );
-		add_action( 'wp_ajax_' . Config::PREFIX . 'options', array( $this, 'save_options' ) );
 
 		add_filter( 'plugin_row_meta', array( $this, 'meta_links' ), 10, 2 );
 	}
@@ -55,14 +56,15 @@ class Admin {
 		wp_enqueue_style( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/css/admin.css', false, Config::VERSION );
 
 		// Localize and enqueue script
+		wp_enqueue_script( Config::SHORT_SLUG . '-editor', Config::$plugin_url . 'assets/admin/js/ace-editor/ace.js', false, Config::VERSION, true );
 		wp_register_script( Config::SHORT_SLUG . '-admin', Config::$plugin_url . 'assets/admin/js/admin.js', array( 'jquery' ), Config::VERSION, true );
 
 		$localize = array(
 			'prefix'       => Config::PREFIX,
-			'save_text'    => esc_html__( 'Save Changes', 'widgets-bundle' ),
-			'support_text' => esc_html__( 'Ask for Support', 'widgets-bundle' ),
-			'save_changes' => esc_html__( 'Please save your changes first.', 'widgets-bundle' ),
-			'processing'   => esc_html__( 'Processing..', 'widgets-bundle' ),
+			'save_text'    => esc_html__( 'Save Changes', 'wp-header-footer-code' ),
+			'support_text' => esc_html__( 'Ask for Support', 'wp-header-footer-code' ),
+			'save_changes' => esc_html__( 'Please save your changes first.', 'wp-header-footer-code' ),
+			'processing'   => esc_html__( 'Processing..', 'wp-header-footer-code' ),
 			'nonce'        => wp_create_nonce( Config::PREFIX . 'nonce' ),
 		);
 
@@ -90,8 +92,8 @@ class Admin {
 	public function meta_links( $links, $file ) {
 		if ( strpos( $file, 'wp-header-footer-code.php' ) !== false ) {
 			$new_links = array(
-				'<a href="https://www.facebook.com/akshitsethi" target="_blank">' . esc_html__( 'Facebook', 'widgets-bundle' ) . '</a>',
-				'<a href="https://twitter.com/akshitsethi" target="_blank">' . esc_html__( 'Twitter', 'widgets-bundle' ) . '</a>',
+				'<a href="https://www.facebook.com/akshitsethi" target="_blank">' . esc_html__( 'Facebook', 'wp-header-footer-code' ) . '</a>',
+				'<a href="https://twitter.com/akshitsethi" target="_blank">' . esc_html__( 'Twitter', 'wp-header-footer-code' ) . '</a>',
 			);
 
 			$links = array_merge( $links, $new_links );
@@ -108,13 +110,13 @@ class Admin {
 		// Storing response in an array
 		$response = array(
 			'code'     => 'success',
-			'response' => esc_html__( 'Options have been updated successfully.', 'widgets-bundle' ),
+			'response' => esc_html__( 'Options have been updated successfully.', 'wp-header-footer-code' ),
 		);
 
 		// Check for _nonce
 		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], Config::PREFIX . 'nonce' ) ) {
 			$response['code']     = 'error';
-			$response['response'] = esc_html__( 'Request does not seem to be a valid one. Try again by refreshing the page.', 'widgets-bundle' );
+			$response['response'] = esc_html__( 'Request does not seem to be a valid one. Try again by refreshing the page.', 'wp-header-footer-code' );
 		} else {
 			// Filter and sanitize
 
@@ -138,7 +140,7 @@ class Admin {
 		// Storing response in an array
 		$response = array(
 			'code'     => 'error',
-			'response' => esc_html__( 'Please fill in both the fields to create your support ticket.', 'widgets-bundle' ),
+			'response' => esc_html__( 'Please fill in both the fields to create your support ticket.', 'wp-header-footer-code' ),
 		);
 
 		// Filter and sanitize
@@ -154,13 +156,13 @@ class Admin {
 				// Success
 				$response = array(
 					'code'     => 'success',
-					'response' => esc_html__( 'I have received your support ticket and will get back to you shortly!', 'widgets-bundle' ),
+					'response' => esc_html__( 'I have received your support ticket and will get back to you shortly!', 'wp-header-footer-code' ),
 				);
 			} else {
 				// Failure
 				$response = array(
 					'code'     => 'error',
-					'response' => esc_html__( 'There was an error creating the support ticket. You can try again later or send me an email directly at akshitsethi@gmail.com', 'widgets-bundle' ),
+					'response' => esc_html__( 'There was an error creating the support ticket. You can try again later or send me an email directly at akshitsethi@gmail.com', 'wp-header-footer-code' ),
 				);
 			}
 		}
