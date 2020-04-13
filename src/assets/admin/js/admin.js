@@ -139,6 +139,8 @@ toastr.options = {
       // Form data
       var data 	= new FormData($('#' + id + ' form')[0]);
 
+      console.log(id);
+
       // Append action
       data.append('action', wphfcode_admin_l10n.prefix + id);
       data.append('_nonce', wphfcode_admin_l10n.nonce);

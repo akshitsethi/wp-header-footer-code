@@ -107,21 +107,48 @@ class Admin {
 	 * Processes plugin options via an AJAX call.
 	 */
 	public function save_options() {
-		// Storing response in an array
+		// Current options
+		$options = get_option( Config::DB_OPTION );
+
+		// If the options do not exist
+		if ( ! $options ) {
+			$options = Config::DEFAULT_OPTIONS;
+		}
+
+		// Default response
 		$response = array(
-			'code'     => 'success',
-			'response' => esc_html__( 'Options have been updated successfully.', 'wp-header-footer-code' ),
+			'code'     => 'error',
+			'response' => esc_html__( 'There was an error processing the request. Please try again later.', 'wp-header-footer-code' ),
 		);
 
 		// Check for _nonce
 		if ( empty( $_POST['_nonce'] ) || ! wp_verify_nonce( $_POST['_nonce'], Config::PREFIX . 'nonce' ) ) {
-			$response['code']     = 'error';
 			$response['response'] = esc_html__( 'Request does not seem to be a valid one. Try again by refreshing the page.', 'wp-header-footer-code' );
 		} else {
-			// Filter and sanitize
+			// Check for action to determine the options to be updated
+			$section = str_replace( Config::PREFIX, '', sanitize_text_field( $_POST['action'] ) );
 
-			// Update options
-			update_option( Config::DB_OPTION, $options );
+			// Ensure $section is not empty
+			if ( ! empty( $section ) ) {
+				if ( in_array( $section, array( 'css', 'js' ) ) ) {
+					// Filter and sanitize options
+					if ( 'css' === $section ) {
+						$options[ $section ] = wp_strip_all_tags( $_POST[ Config::PREFIX . 'css' ] );
+					} elseif ( 'js' === $section ) {
+						$options[ $section ] = array(
+							'header' => strip_tags( $_POST[ Config::PREFIX . 'header_js' ] ),
+							'footer' => strip_tags( $_POST[ Config::PREFIX . 'footer_js' ] ),
+						);
+					}
+
+					// Update options
+					update_option( Config::DB_OPTION, $options );
+
+					// Success
+					$response['code']     = 'success';
+					$response['response'] = esc_html__( 'Options have been updated successfully.', 'wp-header-footer-code' );
+				}
+			}
 		}
 
 		// Headers for JSON format
