@@ -1,0 +1,24 @@
+/**
+ * Meta Boxes
+ *
+ * 01.. Common
+ */
+
+/**
+ * 01.. Common
+ */
+.wphf-label {
+	display: block;
+	padding: 4px 0;
+	font-weight: bold;
+}
+.wphf-textarea {
+	width: 100%;
+}
+.as-code-editor {
+	width: 100%;
+	height: 300px;
+}
+#wphfcode_css_editor {
+	margin-bottom: 3rem;
+}

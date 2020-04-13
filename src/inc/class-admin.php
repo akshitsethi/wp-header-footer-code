@@ -22,9 +22,13 @@ class Admin {
 	 */
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_menu' ) );
+		add_action( 'admin_print_styles-post-new.php', array( $this, 'meta_scripts' ), 100 );
+		add_action( 'admin_print_styles-post.php', array( $this, 'meta_scripts' ), 100 );
 		add_action( 'wp_ajax_' . Config::PREFIX . 'js', array( $this, 'save_options' ) );
 		add_action( 'wp_ajax_' . Config::PREFIX . 'css', array( $this, 'save_options' ) );
 		add_action( 'wp_ajax_' . Config::PREFIX . 'support', array( $this, 'support_ticket' ) );
+		add_action( 'add_meta_boxes', array( $this, 'meta_boxes' ) );
+		add_action( 'save_post', array( $this, 'save_meta' ) );
 
 		add_filter( 'plugin_row_meta', array( $this, 'meta_links' ), 10, 2 );
 	}
@@ -46,6 +50,24 @@ class Admin {
 			// Loading JS conditionally.
 			add_action( 'load-' . $menu, array( $this, 'load_scripts' ) );
 		}
+	}
+
+
+	/**
+	 * Add required scripts for the meta boxes.
+	 */
+	public function meta_scripts() {
+		wp_enqueue_style( Config::SHORT_SLUG . '-post-meta', Config::$plugin_url . 'assets/admin/css/meta.css', false, Config::VERSION );
+
+		wp_enqueue_script( Config::SHORT_SLUG . '-editor', Config::$plugin_url . 'assets/admin/js/ace-editor/ace.js', false, Config::VERSION, true );
+		wp_register_script( Config::SHORT_SLUG . '-post-meta', Config::$plugin_url . 'assets/admin/js/meta.js', array( 'jquery' ), Config::VERSION, true );
+
+		$localize = array(
+			'prefix' => Config::PREFIX,
+		);
+
+		wp_localize_script( Config::SHORT_SLUG . '-post-meta', Config::PREFIX . 'meta_l10n', $localize );
+		wp_enqueue_script( Config::SHORT_SLUG . '-post-meta' );
 	}
 
 
@@ -215,6 +237,100 @@ class Admin {
 
 		// Settings page
 		require_once Config::$plugin_path . 'inc/admin/views/settings.php';
+	}
+
+
+	/**
+	 * Add meta box to all post types to insert post specific styles and
+	 * scripts to the page.
+	 *
+	 * @since 1.0.0
+	 */
+	public function meta_boxes() {
+		foreach ( get_post_types() as $post ) {
+			add_meta_box(
+				Config::PREFIX . 'post_meta',
+				esc_html__( 'Custom CSS & JS', 'wp-header-footer-code' ),
+				array( $this, 'meta_callback' ),
+				$post,
+				'normal',
+				'high'
+			);
+		}
+	}
+
+
+	/**
+	 * Callback function for the meta boxes setup.
+	 *
+	 * @since 1.0.0
+	 */
+	public function meta_callback() {
+		global $post;
+
+		// Using an underscore to prevent it for showing up in the custom fields section
+		$meta = get_post_meta( $post->ID, '_' . Config::PREFIX . 'post_meta_fields', true );
+
+		// If the fields are not set
+		if ( ! $meta ) {
+			$meta = array(
+				'css' => '',
+				'js'  => '',
+			);
+		}
+
+		// Nonce
+		echo '<input type="hidden" name="_' . Config::PREFIX . 'meta_nonce" value="' . wp_create_nonce( basename( __FILE__ ) ) . '">';
+
+		// CSS
+		echo '<p><label for="_' . Config::PREFIX . 'post_meta_fields_css" class="wphf-label">' . esc_html__( 'CSS', 'wp-header-footer-code' ) . '</label>';
+		echo '<p class="as-form-help-block">' . sprintf( esc_html__( 'Add CSS to be inserted in the header of the page. Please note that %1$sopening <style> and closing </style> tags%2$s are not required. Just add your CSS code and nothing else.', 'wp-header-footer-code' ), '<i style="color: #f96773">', '</i>' ) . '</p>';
+		echo '<textarea name="_' . Config::PREFIX . 'post_meta_fields[css]" id="_' . Config::PREFIX . 'post_meta_fields_css" rows="8" class="wphf-textarea">' . stripslashes( $meta['css'] ) . '</textarea></p>';
+		echo '<div id="' . Config::PREFIX . 'css_editor" class="as-code-editor"></div>';
+
+		// JS
+		echo '<p><label for="_' . Config::PREFIX . 'post_meta_fields_js" class="wphf-label">' . esc_html__( 'JS Code', 'wp-header-footer-code' ) . '</label>';
+		echo '<p class="as-form-help-block">' . sprintf( esc_html__( 'Add JS to be inserted in the header of the page. Please note that %1$sopening <script> and closing </script> tags%2$s are not required. Just add the code between these tags over here.', 'wp-header-footer-code' ), '<i style="color: #f96773">', '</i>' ) . '</p>';
+		echo '<textarea name="_' . Config::PREFIX . 'post_meta_fields[js]" id="_' . Config::PREFIX . 'post_meta_fields_js" rows="8" class="wphf-textarea">' . stripslashes( $meta['js'] ) . '</textarea></p>';
+		echo '<div id="' . Config::PREFIX . 'js_editor" class="as-code-editor"></div>';
+	}
+
+
+	/**
+	 * For saving the meta fields in the database.
+	 *
+	 * @since 1.0.0
+	 */
+	public function save_meta( $post_id ) {
+		if ( isset( $_POST[ '_' . Config::PREFIX . 'meta_nonce' ] ) ) {
+			// Verify nonce
+			if ( ! wp_verify_nonce( $_POST[ '_' . Config::PREFIX . 'meta_nonce' ], basename( __FILE__ ) ) ) {
+				return $post_id;
+			}
+
+			// Check autosave
+			if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+				return $post_id;
+			}
+
+			// Check permissions
+			if ( ! current_user_can( 'edit_post', $post_id ) && ! current_user_can( 'edit_page', $post_id ) ) {
+				return $post_id;
+			}
+
+			$old = get_post_meta( $post_id, '_' . Config::PREFIX . 'post_meta_fields', true );
+			$new = $_POST[ '_' . Config::PREFIX . 'post_meta_fields' ];
+
+			if ( $new && $new !== $old ) {
+				// Sanitize data
+				$new['css'] = wp_strip_all_tags( $new['css'] );
+				$new['js']  = strip_tags( $new['js'] );
+
+				update_post_meta( $post_id, '_' . Config::PREFIX . 'post_meta_fields', $new );
+			} elseif ( '' === $new && $old ) {
+				delete_post_meta( $post_id, '_' . Config::PREFIX . 'post_meta_fields', $old );
+			}
+		}
 	}
 
 }
