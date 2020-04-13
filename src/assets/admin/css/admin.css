@@ -418,6 +418,10 @@ textarea.as-form-input-lg {
 	margin-bottom: 10px;
 	color: #909090;
 }
+.as-code-editor {
+	width: 100%;
+	height: 300px;
+}
 
 /* --- Alerts & Buttons --- */
 .as-notice {

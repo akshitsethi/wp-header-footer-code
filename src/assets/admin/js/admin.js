@@ -81,6 +81,31 @@ toastr.options = {
     }
   }
 
+  // CSS and JS editor
+	function getEditor($editorID, $textareaID, $mode) {
+		if ($('#' + $editorID).length > 0) {
+      var editor, textarea;
+
+      editor 	  = ace.edit($editorID, {
+        mode: 'ace/mode/' + $mode,
+        selectionStyle: 'text'
+      });
+
+      textarea 	= $('#' + $textareaID).hide();
+
+			editor.session.setValue(textarea.val());
+      editor.setTheme('ace/theme/xcode');
+
+			editor.session.on('change', function () {
+				textarea.val(editor.session.getValue());
+			});
+
+			editor.session.setUseWrapMode(true);
+			editor.renderer.setShowPrintMargin(null);
+			editor.session.setUseSoftTabs(null);
+    }
+  }
+
   // On DOM ready
   $(document).ready(function () {
     // IOS switches
@@ -90,7 +115,6 @@ toastr.options = {
       var switchery = new Switchery(html);
     });
 
-
     // Sticky header
     if ($(window).width() <= 600) {
       $('.as-header').stick_in_parent({bottoming: false, offset_top: 0});
@@ -99,6 +123,11 @@ toastr.options = {
     } else {
       $('.as-header').stick_in_parent({bottoming: false, offset_top: 32});
     }
+
+    // Code editor
+    getEditor(wphfcode_admin_l10n.prefix + 'css_editor', wphfcode_admin_l10n.prefix + 'css', 'css');
+    getEditor(wphfcode_admin_l10n.prefix + 'header_js_editor', wphfcode_admin_l10n.prefix + 'header_js', 'javascript');
+		getEditor(wphfcode_admin_l10n.prefix + 'footer_js_editor', wphfcode_admin_l10n.prefix + 'footer_js', 'javascript');
 
     // Submission
     $(document).on('click', '#' + wphfcode_admin_l10n.prefix + 'submit', function (e) {
@@ -146,7 +175,6 @@ toastr.options = {
         $('input, textarea, select').removeClass('changed-input');
       });
     });
-
 
     // On form change
     $('form').on('change keyup keydown', 'input, textarea, select', function (e) {

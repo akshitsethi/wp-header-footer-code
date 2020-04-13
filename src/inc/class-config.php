@@ -15,13 +15,18 @@ class Config {
 	public static $plugin_url;
 	public static $plugin_path;
 
-	const PLUGIN_SLUG = 'wp-header-footer-code';
-	const SHORT_SLUG  = 'wphfcode';
-	const VERSION     = '1.0.0';
-	const DB_OPTION   = 'as_' . self::SHORT_SLUG;
-	const PREFIX      = self::SHORT_SLUG . '_';
-
-	const DEFAULT_OPTIONS = array();
+	const PLUGIN_SLUG     = 'wp-header-footer-code';
+	const SHORT_SLUG      = 'wphfcode';
+	const VERSION         = '1.0.0';
+	const DB_OPTION       = 'as_' . self::SHORT_SLUG;
+	const PREFIX          = self::SHORT_SLUG . '_';
+	const DEFAULT_OPTIONS = array(
+		'css' => '',
+		'js'  => array(
+			'header' => '',
+			'footer' => '',
+		),
+	);
 
 	/**
 	 * Class constructor.

@@ -19,6 +19,6 @@ use AkshitSethi\Plugins\WPHeaderFooterCode\Config;
 		</p>
 
 		<div class="as-header-right">
-			<input type="submit" id="<?php echo Config::PREFIX . 'submit'; ?>" name="<?php echo Config::PREFIX . 'submit'; ?>" class="as-btn" value="<?php esc_attr_e( 'Save Changes', 'wp-header-footer-code' ); ?>" data-tab="#javascript">
+			<input type="submit" id="<?php echo Config::PREFIX . 'submit'; ?>" name="<?php echo Config::PREFIX . 'submit'; ?>" class="as-btn" value="<?php esc_attr_e( 'Save Changes', 'wp-header-footer-code' ); ?>" data-tab="#css">
 		</div><!-- .as-header-right -->
 	</div><!-- .as-header -->
